@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+.css_input{
+color: yellow;
+background-color: blue;
+}
+</style>
+{% for order in orders %}
+{% if order.number.0 == '+' %}
+
+<h1>{{ order.name }}: {{ order.number }}</h1>
+
+{% else %}
+<h6>{{ order.name }}: {{ order.number }}</h6>
+
+{% endif %}
+{% endfor %}
+
+<form action="{% url 'thanks' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Отправить</button>
+</form>
+{% endblock %}
